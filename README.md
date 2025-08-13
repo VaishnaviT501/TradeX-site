@@ -55,10 +55,10 @@ Built with **HTML5** and **CSS3** for a fast, mobile-friendly experience.
 - **Performance Optimized** — Lightweight HTML & CSS for fast loading.
 
 ---
-<img width="1915" height="1019" alt="Screenshot 2025-08-13 215059" src="https://github.com/user-attachments/assets/b52473eb-1c72-4886-8441-5cb363be4804" />
-<img width="1919" height="967" alt="Screenshot 2025-08-13 215124" src="https://github.com/user-attachments/assets/8c496833-85ad-4e6c-b001-bdcb5c04325b" />
-<img width="1919" height="973" alt="Screenshot 2025-08-13 224902" src="https://github.com/user-attachments/assets/f52ebdab-0f3d-4059-877c-ea34fb4b71aa" />
-<img width="1919" height="967" alt="Screenshot 2025-08-13 224920" src="https://github.com/user-attachments/assets/e4e540d7-399b-428a-af36-5f84325eb771" />
-<img width="1917" height="968" alt="Screenshot 2025-08-13 224959" src="https://github.com/user-attachments/assets/f002437e-9600-4314-afc6-6573442667f2" />
-<img width="1919" height="973" alt="Screenshot 2025-08-13 224945" src="https://github.com/user-attachments/assets/b13c8d7b-7a59-4003-a572-8e4677a4d37e" />
+
+<img width="1919" height="967" alt="Screenshot 2025-08-14 000033" src="https://github.com/user-attachments/assets/03f85320-30d3-4362-a964-dd57445db538" />
+<img width="1916" height="964" alt="Screenshot 2025-08-14 000016" src="https://github.com/user-attachments/assets/d2f0797d-1f60-42f4-b4b7-2fa1938ed941" />
+<img width="1917" height="968" alt="Screenshot 2025-08-13 235951" src="https://github.com/user-attachments/assets/c7bd9579-29dd-4f2d-864f-23e26752ce6d" />
+<img width="1919" height="972" alt="Screenshot 2025-08-13 235929" src="https://github.com/user-attachments/assets/c02d5319-e3c3-4c24-b780-e4baceb67557" />
+<img width="1919" height="968" alt="Screenshot 2025-08-13 235913" src="https://github.com/user-attachments/assets/d190b0bd-f0d4-40f3-8a61-62093d14e705" />
 
