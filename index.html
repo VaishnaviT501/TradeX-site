@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TradeX — Simple, Secure Trading</title>
+  <style>
+    :root{
+      --bg:#0b1020;           /* deep navy */
+      --card:#121937;         /* card surface */
+      --muted:#9aa4bf;        /* muted text */
+      --text:#e7ebff;         /* main text */
+      --brand:#6ea8fe;        /* brand primary */
+      --accent:#7ef0c1;       /* accent */
+      --danger:#ff7b7b;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 20px;
+      --spacing: 20px;
+      --container: 1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background: radial-gradient(1200px 600px at 80% -10%, rgba(110,168,254,.2), transparent 60%), radial-gradient(900px 500px at -10% 10%, rgba(126,240,193,.15), transparent 60%), var(--bg); color:var(--text); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:var(--container); margin:0 auto; padding:0 20px}
+
+    /* Nav */
+
+    nav{position:sticky; top:0; z-index:50; backdrop-filter:saturate(160%) blur(14px); background:rgba(11,16,32,.6); border-bottom:1px solid rgba(255,255,255,.06)}
+    .nav-wrap{display:flex; align-items:center; justify-content:space-between; height:64px}
+    .brand{display:flex; align-items:center; gap:12px; font-weight:700; letter-spacing:.4px}
+    .brand-logo{width:28px; height:28px; display:grid; place-items:center; border-radius:10px; background:linear-gradient(145deg, var(--brand), var(--accent)); box-shadow: var(--shadow)}
+    .nav-links{display:flex; gap:22px}
+    .nav-links a{opacity:.9}
+
+    /* Buttons */
+    .btn{display:inline-block; padding:12px 18px; border-radius:14px; font-weight:600; border:1px solid rgba(255,255,255,.08); background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); box-shadow: var(--shadow)}
+    .btn.primary{background:linear-gradient(180deg, var(--brand), #3c7af9); border:none}
+    .btn.ghost{background:transparent; border:1px solid rgba(255,255,255,.15)}
+
+    /* Hero */
+    .hero{padding:80px 0 40px}
+    .hero-grid{display:grid; grid-template-columns: 1.2fr .8fr; gap:36px; align-items:center}
+    .tag{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; background:rgba(110,168,254,.12); color:#d9e5ff; font-size:14px; border:1px solid rgba(110,168,254,.25)}
+    h1{font-size:46px; line-height:1.1; margin:14px 0 10px}
+    .sub{color:var(--muted); font-size:18px; max-width:60ch}
+    .cta{margin-top:22px; display:flex; gap:12px; flex-wrap:wrap}
+
+    /* Market cards */
+    .section{padding:50px 0}
+    .section h2{font-size:28px; margin:0 0 16px}
+    .muted{color:var(--muted)}
+    .grid{display:grid; gap:18px}
+    .grid.cols-3{grid-template-columns: repeat(3, 1fr)}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); border:1px solid rgba(255,255,255,.08); border-radius:var(--radius); padding:18px; box-shadow: var(--shadow)}
+    .card-header{display:flex; align-items:center; justify-content:space-between; margin-bottom:12px}
+    .pair{display:flex; align-items:center; gap:10px}
+    .pair .dot{width:10px; height:10px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 3px rgba(126,240,193,.15)}
+    .price{font-weight:700}
+    .change.up{color:var(--accent)}
+    .change.down{color:var(--danger)}
+
+    /* Faux sparkline chart (CSS only) */
+    .spark{height:64px; border-radius:12px; background: repeating-linear-gradient(to right, rgba(255,255,255,.06) 0 1px, transparent 1px 40px), linear-gradient(180deg, rgba(110,168,254,.25), rgba(255,255,255,.03)); position:relative; overflow:hidden}
+    .spark::after{content:""; position:absolute; left:0; top:0; bottom:0; right:0; background: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 40\" preserveAspectRatio=\"none\"><polyline fill=\"none\" stroke=\"%23a9c7ff\" stroke-width=\"2\" points=\"0,30 10,28 20,26 30,20 40,24 50,14 60,18 70,12 80,22 90,18 100,10\"/></svg>'); background-size:100% 100%; opacity:.95}
+
+    /* Features */
+    .features{grid-template-columns: repeat(3, 1fr)}
+    .feature{display:grid; gap:10px}
+    .icon{width:36px; height:36px; border-radius:12px; display:grid; place-items:center; background:rgba(110,168,254,.15); border:1px solid rgba(110,168,254,.25)}
+
+    /* Pricing */
+    .pricing{grid-template-columns: repeat(3, 1fr)}
+    .price-card .title{font-weight:700; font-size:18px}
+    .price-val{font-size:34px; font-weight:800; margin:10px 0}
+    .list{margin:0; padding:0; list-style:none; display:grid; gap:8px; color:var(--muted)}
+    .popular{outline:2px solid var(--brand)}
+
+    /* Testimonials */
+    .testis{grid-template-columns: repeat(3, 1fr)}
+    .quote{font-style:italic; color:#d7dcf5}
+
+    /* Footer */
+    footer{border-top:1px solid rgba(255,255,255,.08); padding:30px 0; color:var(--muted)}
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .hero-grid{grid-template-columns: 1fr}
+      .grid.cols-3, .features, .pricing, .testis{grid-template-columns: 1fr}
+      h1{font-size:36px}
+    }
+  </style>
+</head>
+<body>
+  <!-- Nav -->
+  <nav>
+    <div class="container nav-wrap">
+      <a class="brand" href="#">
+        <span class="brand-logo">📈</span>
+        <span>TradeX</span>
+      </a>
+      <div class="nav-links">
+        <a href="#markets">Markets</a>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="nav-cta">
+        <a class="btn ghost" href="#">Sign In</a>
+        <a class="btn primary" href="#">Get Started</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="tag">New • Zero-commission stock & crypto trades</span>
+        <h1>Simple. Secure. <br/>Trading for Everyone.</h1>
+        <p class="sub">Launch a blazing-fast, professional landing page for a trading platform. This HTML + CSS template is fully responsive, lightweight, and perfect for GitHub Pages.</p>
+        <div class="cta">
+          <a class="btn primary" href="#pricing">Create Free Account</a>
+          <a class="btn" href="#markets">Browse Markets</a>
+        </div>
+      </div>
+      <div class="card" aria-label="Demo dashboard">
+        <div class="card-header">
+          <div class="pair"><span class="dot"></span><strong>BTC/USDT</strong></div>
+          <div class="price">$67,245 <span class="change up">(+2.1%)</span></div>
+        </div>
+        <div class="spark" title="Price trend (illustration)"></div>
+        <div class="card-header" style="margin-top:14px">
+          <div class="pair"><span class="dot" style="background:var(--brand)"></span><strong>NIFTY 50</strong></div>
+          <div class="price">24,180 <span class="change down">(-0.4%)</span></div>
+        </div>
+        <div class="spark" title="Price trend (illustration)"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Markets -->
+  <section id="markets" class="section">
+    <div class="container">
+      <h2>Popular Markets</h2>
+      <p class="muted">Spot opportunities across stocks, indices, and crypto. (Data is illustrative.)</p>
+      <div class="grid cols-3">
+        <div class="card">
+          <div class="card-header">
+            <div class="pair"><span class="dot"></span><strong>ETH/USDT</strong></div>
+            <div class="price">$3,180 <span class="change up">+1.3%</span></div>
+          </div>
+          <div class="spark"></div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="pair"><span class="dot" style="background:#ffd166"></span><strong>GOLD</strong></div>
+            <div class="price">$2,420 <span class="change up">+0.5%</span></div>
+          </div>
+          <div class="spark"></div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="pair"><span class="dot" style="background:#ff8fa3"></span><strong>SENSEX</strong></div>
+            <div class="price">79,520 <span class="change down">-0.2%</span></div>
+          </div>
+          <div class="spark"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="section">
+    <div class="container">
+      <h2>Why TradeX</h2>
+      <div class="grid features" style="gap:18px">
+        <div class="card feature">
+          <div class="icon">🔐</div>
+          <div class="title"><strong>Bank‑grade Security</strong></div>
+          <div class="muted">Encrypted at rest and in transit, with 2FA-ready UX components.</div>
+        </div>
+        <div class="card feature">
+          <div class="icon">⚡</div>
+          <div class="title"><strong>Lightning‑fast</strong></div>
+          <div class="muted">Minimal CSS, no JS required, tuned for Lighthouse performance.</div>
+        </div>
+        <div class="card feature">
+          <div class="icon">📱</div>
+          <div class="title"><strong>Responsive Design</strong></div>
+          <div class="muted">Grid & flex layout that adapts from mobile to desktop elegantly.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" class="section">
+    <div class="container">
+      <h2>Transparent Pricing</h2>
+      <p class="muted">Start free. Upgrade when you need more.</p>
+      <div class="grid pricing" style="gap:18px">
+        <div class="card price-card">
+          <div class="title">Starter</div>
+          <div class="price-val">₹0</div>
+          <ul class="list">
+            <li>Basic market pages</li>
+            <li>Responsive design</li>
+            <li>Email support</li>
+          </ul>
+          <div style="margin-top:14px"><a class="btn" href="#">Choose Starter</a></div>
+        </div>
+        <div class="card price-card popular">
+          <div class="title">Pro</div>
+          <div class="price-val">₹499<span style="font-size:14px; color:var(--muted)">/mo</span></div>
+          <ul class="list">
+            <li>Advanced sections</li>
+            <li>Priority support</li>
+            <li>Custom branding</li>
+          </ul>
+          <div style="margin-top:14px"><a class="btn primary" href="#">Choose Pro</a></div>
+        </div>
+        <div class="card price-card">
+          <div class="title">Enterprise</div>
+          <div class="price-val">Custom</div>
+          <ul class="list">
+            <li>Dedicated account manager</li>
+            <li>Security reviews</li>
+            <li>SLA & onboarding</li>
+          </ul>
+          <div style="margin-top:14px"><a class="btn" href="#">Contact Sales</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section">
+    <div class="container">
+      <h2>Loved by Traders</h2>
+      <div class="grid testis" style="gap:18px">
+        <div class="card">
+          <p class="quote">“This design looks like a real platform. Deployed on GitHub Pages in minutes.”</p>
+          <p class="muted">— A. Sharma</p>
+        </div>
+        <div class="card">
+          <p class="quote">“Clean, professional, and responsive without any JavaScript.”</p>
+          <p class="muted">— R. Iyer</p>
+        </div>
+        <div class="card">
+          <p class="quote">“Perfect for showcasing front-end skills quickly.”</p>
+          <p class="muted">— V. Gupta</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="section">
+    <div class="container">
+      <h2>FAQ</h2>
+      <div class="grid" style="gap:14px">
+        <div class="card">
+          <strong>Is this a real trading app?</strong>
+          <p class="muted">This is a static front-end template for showcasing UI/UX skills. No live data, orders, or authentication.</p>
+        </div>
+        <div class="card">
+          <strong>Can I add my logo and colors?</strong>
+          <p class="muted">Yes. Tweak the CSS variables in <code>:root</code> to instantly re-theme the site.</p>
+        </div>
+        <div class="card">
+          <strong>Will it work on mobile?</strong>
+          <p class="muted">Absolutely. The layout uses responsive grids and scales down gracefully.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container" style="display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap">
+      <div style="color:#ffffff">© <span id="year">2025</span> TradeX. For demo purposes. <strong>By Vaishnavi Tiwari</strong></div>
+      <div style="display:flex; gap:12px">
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
